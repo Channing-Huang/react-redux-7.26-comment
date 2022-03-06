@@ -43,6 +43,17 @@ function strictEqual(a, b) {
 
 // createConnect with default args builds the 'official' connect behavior. Calling it with
 // different options opens up some testing and extensibility scenarios
+
+// example
+// const mapStateToProp = (store) => ({ userInfo: store.root.userInfo })
+
+// function Index(){
+//     /* ..... */
+//     return <div> { /* .... */ } </div>
+// }
+// export default connect(mapStateToProp)(Index)
+
+
 export function createConnect({
   connectHOC = connectAdvanced,
   mapStateToPropsFactories = defaultMapStateToPropsFactories,
@@ -63,6 +74,7 @@ export function createConnect({
       ...extraOptions
     } = {}
   ) {
+    // match 函数的第二个参数是一个函数数组，通过将第一个参数作为调用参数，依次顺序调用第二个参数内的函数来获取结果
     // 包装后的mapStateToProps，将store中的state注入到props内部
     const initMapStateToProps = match(
       mapStateToProps,

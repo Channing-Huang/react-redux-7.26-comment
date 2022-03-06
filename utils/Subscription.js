@@ -4,6 +4,12 @@ import { getBatch } from './batch'
 // well as nesting subscriptions of descendant components, so that we can ensure the
 // ancestor components re-render before descendants
 
+// 我们可以得出结论 createListenerCollection 可以产生一个 listeners 。
+// listeners的作用。
+// 1收集订阅： 以链表的形式收集对应的 listeners  (每一个Subscription) 的handleChangeWrapper函数。
+// 2派发更新：, 通过 batch 方法( react-dom 中的  unstable_batchedUpdates ) 来进行批量更新。
+// 温馨提示： React 的 unstable_batchedUpdate() API 允许将一次事件循环中的所有 React 更新都一起批量处理到一个渲染过程中。
+
 function createListenerCollection() {
   const batch = getBatch()
   let first = null
